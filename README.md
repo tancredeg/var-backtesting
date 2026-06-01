@@ -128,4 +128,4 @@ jupyter notebook VaR_ES_Market_Risk.ipynb
 
 ## Author
 
-**Tancrede Géli** · [github.com/tancredeg](https://github.com/tancredeg)
+**Tancrede G** · [github.com/tancredeg](https://github.com/tancredeg)
