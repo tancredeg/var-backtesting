@@ -17,13 +17,15 @@ Fait
   pour l'historique, mais procyclique (43,5 % de sept. 2008 à mars 2009, pic = 4,5 × la médiane).
 - 131 tests, couverture 99 %, ruff, mypy strict. Résultats existants régénérés à l'identique.
 
-Bloquant
-- Push refusé : le rattachement en écriture de `tancredeg/var-backtesting` a été bloqué, car les
-  instructions du projet indiquent encore `tancredeg/NOM-DU-REPO`. Rien n'est poussé.
+- Références alignées sur la vérification documentaire du 2026-10-27 (seuils Z2 valables pour
+  ν ≥ 5 ; multiplicateur 3 = minimum réglementaire ; heures de clôture des ETF sourcées ; mention
+  « décote de LQD » retirée).
+- Commits signés (committer Claude), auteur Tancrède Geli.
+
+Poussé le 2026-10-28 : `main` (avance rapide depuis `dd4ff65`, sans force push) et tag `v1.0.0`.
 
 Suite
-1. Remplacer `NOM-DU-REPO` par `var-backtesting` dans les instructions du projet, puis relancer :
-   push de `main` et du tag `v1.0.0`, contrôle de la CI (Linux + Windows).
+1. Vérifier que la CI passe (Linux 3.12 / 3.13 et Windows).
 2. Release v1.0.0 (texte : `CHANGELOG.md`), épinglage du repo, post LinkedIn.
 
 
