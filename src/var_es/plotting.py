@@ -245,7 +245,7 @@ def plot_clustering(table: pd.DataFrame, levels: Sequence[float], horizon: int) 
         iid = float(t["iid_share"].iloc[0])
         ax.axvline(iid, color=INK, lw=1.2)
         ax.text(
-            iid + 0.005, -0.78, f"i.i.d. benchmark {iid:.0%}", color=INK_2, fontsize=8, va="center"
+            iid + 0.005, -0.78, f"i.i.d. benchmark {iid:.1%}", color=INK_2, fontsize=8, va="center"
         )
         for yi, v in zip(y, t["share_within"], strict=True):
             ax.text(v + 0.01, yi, f"{v:.0%}", va="center", color=INK_2, fontsize=8.5)

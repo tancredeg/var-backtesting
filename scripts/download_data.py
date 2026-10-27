@@ -1,7 +1,7 @@
 """Download and freeze the price panel used by the VaR/ES backtests.
 
-Run ONCE, locally (Yahoo Finance is not reachable from CI or sandboxes), then commit
-the outputs. Every later step reads the frozen snapshot, never the network.
+Run once (network access to Yahoo Finance required), then commit the outputs. Every
+later step reads the frozen snapshot, never the network; CI never calls this script.
 
 Outputs (relative to --out, default ``data/``):
     raw/<TICKER>.csv          Date, Close, Adj Close (one file per ticker, as downloaded)

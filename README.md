@@ -6,9 +6,9 @@
 
 Five one-day VaR / Expected Shortfall models (historical, normal, Student-t, GARCH-filtered
 historical simulation, Monte Carlo with a copula) are forecast out of sample, without
-look-ahead, on a five-ETF multi-asset portfolio over 4,812 days (Nov 2006 to Dec 2025).
-Each one is judged with Kupiec, Christoffersen, rolling Basel traffic lights and the
-Acerbi-Székely ES test.
+look-ahead, on a five-ETF multi-asset portfolio over 4,812 days (Nov 2006 to Dec 2025) and
+judged with Kupiec, Christoffersen, rolling Basel traffic lights and the Acerbi-Székely ES
+test, to show which model fails in a crisis and why.
 
 ## Key results
 

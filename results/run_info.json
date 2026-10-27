@@ -58,13 +58,13 @@
   "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
   "numpy": "2.5.3",
   "pandas": "3.0.5",
-  "runtime_seconds": 461.5,
+  "runtime_seconds": 216.1,
   "model_seconds": {
-    "Historical": 1.0,
-    "Normal": 3.3,
-    "Student-t": 8.5,
-    "FHS-GARCH": 6.4,
-    "Monte Carlo": 214.7
+    "Historical": 0.8,
+    "Normal": 2.7,
+    "Student-t": 6.6,
+    "FHS-GARCH": 5.2,
+    "Monte Carlo": 193.6
   },
   "fhs_garch_nonconverged_refits": 0,
   "forecast_columns": [
