@@ -1,4 +1,31 @@
-# PROGRESS — market-risk-var-es
+# PROGRESS — var-backtesting
+
+## 2026-10-27 — Intégration dans `tancredeg/var-backtesting`, audits, coût en capital
+
+Fait
+- Ancien code (`dd4ff65`, juin 2026) enfin lu : 11 constats avec numéros de ligne (`AUDIT.md` §9).
+  Le README public affichait encore le build biaisé (Student-t « 19 / PASS », zones toutes vertes).
+- v1 rejouée par-dessus `origin/main` sans réécrire son historique : commit de retrait de l'ancien
+  pipeline, puis les commits v1, auteur `282603140+tancredeg@users.noreply.github.com`.
+- Test de régression : tolérances tirées d'un plancher de bruit mesuré (bruit 1e-15 sur les prix →
+  6e-5 relatif sur le Monte Carlo, < 2e-8 ailleurs) ; comptages exacts.
+- CI : job Windows ajouté ; checkout CRLF simulé en local, 126/126 tests verts.
+- Audit des données (`scripts/audit_data.py`) : clôtures = téléchargement frais à 5e-10, toutes dans
+  [plus bas, plus haut] ; ajustements de dividendes plausibles ; SPY vs S&P 500 : écart médian
+  10,6 pb (2004–2009) puis 2,7 pb, autocorrélation −0,37 (effet d'heure de clôture, pas d'erreur).
+- Coût en capital Bâle 1996 (`results/capital_charge.csv`) : FHS 17,2 % en moyenne contre 19,2 %
+  pour l'historique, mais procyclique (43,5 % de sept. 2008 à mars 2009, pic = 4,5 × la médiane).
+- 131 tests, couverture 99 %, ruff, mypy strict. Résultats existants régénérés à l'identique.
+
+Bloquant
+- Push refusé : le rattachement en écriture de `tancredeg/var-backtesting` a été bloqué, car les
+  instructions du projet indiquent encore `tancredeg/NOM-DU-REPO`. Rien n'est poussé.
+
+Suite
+1. Remplacer `NOM-DU-REPO` par `var-backtesting` dans les instructions du projet, puis relancer :
+   push de `main` et du tag `v1.0.0`, contrôle de la CI (Linux + Windows).
+2. Release v1.0.0 (texte : `CHANGELOG.md`), épinglage du repo, post LinkedIn.
+
 
 ## 2026-10-14 — Phases 1 à 6 (session unique)
 
