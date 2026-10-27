@@ -1,5 +1,6 @@
-"""Backtests: exception coverage, Basel traffic light, Expected Shortfall."""
+"""Backtests: exception coverage, Basel traffic light, Expected Shortfall, capital."""
 
+from var_es.backtest.capital import basel_capital
 from var_es.backtest.coverage import (
     CoverageReport,
     LRTest,
@@ -27,6 +28,7 @@ __all__ = [
     "LRTest",
     "TransitionCounts",
     "Z2Null",
+    "basel_capital",
     "christoffersen_cc",
     "christoffersen_independence",
     "classify",

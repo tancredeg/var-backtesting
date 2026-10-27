@@ -217,6 +217,8 @@ def main() -> None:
     crisis.to_csv(res_dir / "crisis_breakdown.csv", index=False, float_format="%.6g")
     clus = A.clustering_table(results, cfg.levels, horizon=10)
     clus.to_csv(res_dir / "clustering.csv", index=False, float_format="%.6g")
+    capital = A.capital_table(results, cfg.crisis_windows, cfg.zone_window)
+    capital.to_csv(res_dir / "capital_charge.csv", index=False, float_format="%.6g")
     for lv in cfg.levels:
         A.exceptions_by_year(results, lv).to_csv(
             res_dir / f"exceptions_by_year_{100 * lv:g}.csv", float_format="%.6g"

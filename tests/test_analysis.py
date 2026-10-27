@@ -108,3 +108,12 @@ def test_clustering_and_yearly_tables(results: dict[str, ForecastResult]) -> Non
     assert c["iid_share"] == pytest.approx(1 - 0.99**10)
     yearly = A.exceptions_by_year(results, 0.99)
     assert yearly["Clustered"].sum() == 6 and yearly["T"].sum() == 600
+
+
+def test_capital_table(results: dict[str, ForecastResult]) -> None:
+    cap = A.capital_table(results, {"Q3 2020": ("2020-07-01", "2020-09-30")})
+    c = cap[cap["model"] == "Clustered"].iloc[0]
+    s = cap[cap["model"] == "Spread"].iloc[0]
+    assert c["mean_capital"] > 0 and c["max_over_median"] >= 1.0
+    assert c["mean_multiplier"] >= 3.0 and s["mean_multiplier"] >= 3.0
+    assert "mean_capital Q3 2020" in cap.columns

@@ -8,6 +8,7 @@ import numpy as np
 import numpy.typing as npt
 import pandas as pd
 
+from var_es.backtest.capital import basel_capital
 from var_es.backtest.coverage import coverage_report, transition_counts
 from var_es.backtest.es_test import empirical_pvalue, z2_statistic
 from var_es.backtest.traffic_light import (
@@ -220,3 +221,33 @@ def exceptions_by_year(results: Mapping[str, ForecastResult], level: float) -> p
         out[name] = hits(res.frame, level).groupby(years).sum().astype(int)
     out.index.name = "year"
     return out
+
+
+def capital_table(
+    results: Mapping[str, ForecastResult], periods: Periods, window: int = 250
+) -> pd.DataFrame:
+    """Basel (1996) capital charge per model: level, crisis level and procyclicality.
+
+    ``max_over_median`` measures procyclicality: how much the charge jumps in the worst
+    period relative to a normal day.
+    """
+    rows = []
+    for name, res in results.items():
+        f = res.frame
+        cap = basel_capital(f[var_col(0.99)], hits(f, 0.99), zone_window=window)
+        k = cap["capital"]
+        row: dict[str, object] = {
+            "model": name,
+            "first_date": pd.DatetimeIndex(cap.index)[0].date().isoformat(),
+            "mean_capital": float(k.mean()),
+            "median_capital": float(k.median()),
+            "max_capital": float(k.max()),
+            "max_over_median": float(k.max() / k.median()),
+            "mean_multiplier": float(cap["multiplier"].mean()),
+            "share_days_multiplier_above_3": float((cap["multiplier"] > 3.0).mean()),
+            "mean_var99": float(f[var_col(0.99)].mean()),
+        }
+        for label, (start, end) in periods.items():
+            row[f"mean_capital {label}"] = float(k.loc[start:end].mean())
+        rows.append(row)
+    return pd.DataFrame(rows)
