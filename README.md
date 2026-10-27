@@ -40,7 +40,7 @@ test, to show which model fails in a crisis and why.
    come within 10 trading days of the previous one, against 20 % for FHS (9.6 % if exceptions
    were independent). At 97.5 % FHS sits on the independent benchmark (22.5 % vs 22.4 %).
 3. **Basel traffic light.** The four models without volatility dynamics turn red between
-   9 and 22 October 2008 and peak at 11 to 19 exceptions in 250 days. FHS never leaves
+   9 and 22 October 2008 and peak at 11 to 19 exceptions in 250 days. FHS never goes beyond
    yellow: its peak is 9, after March 2020.
 4. **Expected Shortfall.** Z2 rejects the 97.5 % ES of Normal, Student-t and Monte Carlo
    (p ≤ 0.0012), not of historical simulation (p = 0.060) or FHS (p = 0.22). Over
@@ -61,15 +61,15 @@ Monte Carlo, clustering is 54-76 % of the statistic; the rest is too many except
 reaches the VaR only as crisis losses enter the window.
 
 - Historical 99 % VaR went from 1.98 % (12 Sep 2008) to only 3.44 % by 31 October, while
-  21-day realised volatility peaked at 3.5 % a day.
+  21-day realised volatility reached 3.5 % a day (6 November).
 - It then stayed above 2.5 % until November 2010. Zero exceptions in 2009 and 2010
   (2.5 expected each) offset the 11 of 2008. That is why the full-sample count looks right
   while the timing is wrong.
 
 **The fix and its limit.** FHS rescales the historical residuals by a GARCH(1,1)
 conditional volatility, so its VaR moves with the market. It reached 9.6 % on 29 October
-2008, about twice the worst loss of the period (4.85 % on 15 October). It is conservative, and backtests do not
-penalise that. FHS still fails in March 2020: portfolio volatility rose about ninefold in
+2008, about twice the worst loss of the period (4.85 % on 15 October). It is conservative,
+and backtests do not penalise that. FHS still fails in March 2020: portfolio volatility rose about ninefold in
 five weeks (21-day volatility from 0.25 % to 2.27 % a day), faster than a daily GARCH
 update can follow. The result is 7 exceptions at 97.5 % in February-April 2020 for 1.55
 expected. All five pairs of consecutive FHS exceptions at 99 % fall in abrupt sell-offs:
