@@ -75,8 +75,8 @@ update can follow. The result is 7 exceptions at 97.5 % in February-April 2020 f
 expected. All five pairs of consecutive FHS exceptions at 99 % fall in abrupt sell-offs:
 April 2013 (gold), August 2015, February and March 2020, April 2025.
 
-**What it costs.** Under the Basel 1996 capital formula (ten-day VaR, multiplier 3 plus the
-traffic-light add-on; `results/capital_charge.csv`), FHS does not cost more capital on
+**What it costs.** Under the Basel 1996 capital formula (ten-day VaR, multiplier set at its
+regulatory minimum of 3, plus the traffic-light add-on; `results/capital_charge.csv`), FHS does not cost more capital on
 average: 17.2 % of portfolio value against 19.2 % for historical simulation. Its multiplier
 stays above 3 on 6.5 % of days, against 23-43 % for the other models. Its cost is
 procyclicality. From September 2008 to March 2009 its charge averaged 43.5 %, against
@@ -120,8 +120,8 @@ rejected (p = 0.003).
 **Limitations (what the study does not do).**
 
 - One-day horizon only, on a linear ETF portfolio. There are no liquidity or intraday effects.
-  ETF prices can leave their NAV in stress: LQD lost 9.1 % and regained 9.8 % on 29-30
-  September 2008.
+  ETF closing prices can swing far more than the bonds they hold: LQD closed 9.1 % down on
+  29 September 2008 and 9.8 % up the next day, both prints inside the day's trading range.
 - The data come from a single vendor; internal consistency checks are in the methodology notes.
 - GARCH is symmetric (no leverage effect), and the Gaussian copula has no tail dependence.
 - Monte Carlo ES carries simulation noise: up to 9 % relative standard deviation at 99 % on

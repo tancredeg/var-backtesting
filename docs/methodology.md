@@ -30,8 +30,10 @@ quoted in the README come from `scripts/run_results.py`.
 * SPY against the S&P 500 index: median daily gap 10.6 bp over 2004-2009 and 2.7 bp over
   2010-2025, autocorrelation -0.37 (gaps reverse the next day) and a SPY / index ratio that
   stays between 0.0984 and 0.1014: the larger early gaps reverse instead of accumulating,
-  which points to closing-time effects (several exchanges moved ETF closes from 4:15 to
-  4:00 p.m. ET during 2008), not to level errors.
+  which points to closing-time effects, not to level errors. ETFs on the American Stock
+  Exchange, where SPY was listed, stopped trading at 4:15 p.m. ET (SEC filing
+  SR-Amex-2003-89); NYSE Arca moved its ETF close to 4:00 p.m. on 1 January 2008
+  (SR-NYSEArca-2007-124). The S&P 500 closes at 4:00 p.m.
 
 ## 2. Forecasting protocol
 
@@ -105,15 +107,19 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
   distribution is simulated under *each model's own* predictive distribution (5,000 paths,
   drawn day by day inside the engine), so the p-value is exact for that model, including the
   discreteness of the empirical models. The simulation reproduces the published 5 % threshold
-  ($\approx -0.70$ for $T = 250$).
+  ($\approx -0.70$ for $T = 250$; Acerbi and Székely, 2014, Table 4). That threshold holds for
+  Gaussian and Student-t tails with $\nu \ge 5$, not for $\nu = 3$ ($-0.82$ at 5 %, $-4.4$ at
+  0.01 %), which is why each model gets its own simulated null rather than a fixed cut-off.
 
 ## 6. Capital charge
 
 What a backtest result costs (`var_es.backtest.capital`):
 $K_t = \sqrt{10}\,\max\big(VaR_t,\ (3 + m_t)\,\overline{VaR}_{60}\big)$, with $VaR_t$ the one-day
 99 % VaR for day $t$, $\overline{VaR}_{60}$ its 60-day average and $m_t$ the plus factor of the
-exceptions observed over the 250 days before $t$ (BCBS, 1996). Simplifications: the multiplier
-is updated daily rather than quarterly, and there is no stressed-VaR term (added by Basel 2.5).
+exceptions observed over the 250 days before $t$ (BCBS, 1996, Amendment, B.4 (i)-(j)). The 3 is
+the regulatory minimum; supervisors may set it higher. Simplifications: the multiplier is
+updated daily rather than quarterly, and there is no stressed-VaR term (added by Basel 2.5,
+BCBS, July 2009).
 Reported per model: mean and median charge, mean charge in each crisis window, and the
 peak-to-median ratio as a measure of procyclicality.
 
@@ -133,8 +139,11 @@ peak-to-median ratio as a measure of procyclicality.
 
 ## 8. Limitations (what the study does not do)
 
-* One-day horizon, linear portfolio of five ETFs, no intraday or liquidity effects; ETF closes
-  can deviate from NAV in stress (LQD fell 9.1 % and rebounded 9.8 % on 29-30 September 2008).
+* One-day horizon, linear portfolio of five ETFs, no intraday or liquidity effects. ETF
+  closing prices can swing far more than their holdings in stress: LQD closed 9.1 % down on
+  29 September 2008 and 9.8 % up the next day. Both prints lie inside the day's range (data
+  checks above); whether LQD traded at a premium or a discount to NAV that week is not checked
+  here (Morningstar reports a persistent premium from September 2008 to early 2009).
 * One data vendor (Yahoo Finance). The checks above are internal consistency checks, not a
   second source; 2014-2024 returns also match an earlier download to $2\cdot10^{-6}$.
 * Asymptotic $\chi^2$ p-values for Kupiec and Christoffersen; with about 48 expected 99 %

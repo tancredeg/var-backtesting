@@ -9,7 +9,8 @@ where :math:`\mathrm{VaR}_t` is the one-day 99 % VaR computed at the close of :m
 (the "previous day's VaR"), :math:`\sqrt{10}` scales it to the regulatory ten-day horizon and
 :math:`m_t` is the plus factor of the traffic light, read on the exceptions of the 250 days
 *before* :math:`t`. Two simplifications are deliberate: the multiplier is updated daily
-(supervisors update it quarterly) and no stressed-VaR term is added (Basel 2.5, 2009).
+(supervisors update it quarterly) and no stressed-VaR term is added (Basel 2.5, BCBS,
+July 2009). The 3 is the regulatory minimum ("absolute minimum of 3", Amendment B.4 (j)).
 
 Reference: Basel Committee on Banking Supervision (1996), *Amendment to the Capital Accord to
 incorporate market risks*; and the 1996 backtesting framework for the plus factors.

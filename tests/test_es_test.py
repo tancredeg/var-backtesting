@@ -35,8 +35,9 @@ def test_z2_input_validation() -> None:
 
 
 def test_z2_matches_published_5pct_critical_value() -> None:
-    """Acerbi and Székely (2014) report a 5 % threshold of about -0.70 for T = 250,
-    alpha = 2.5 % (and about -1.8 at 0.01 %), stable across t distributions."""
+    """Acerbi and Székely (2014, Table 4) report a 5 % threshold of about -0.70 for T = 250,
+    alpha = 2.5 % (about -1.8 at 0.01 %), for Gaussian and Student-t tails with nu >= 5; at
+    nu = 3 the thresholds are -0.82 and -4.4."""
     var, es = normal_var_es(0.0, 1.0, LEVEL)
     sims = np.random.default_rng(0).standard_normal((40_000, 250))
     z = _z2_matrix(sims, var, es)

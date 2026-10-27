@@ -237,8 +237,11 @@ Kupiec, test à 5 %, région de non-rejet (p = 1 %) : T = 250 → [1, 6] ; T = 5
 T = 1 000 → [5, 16] ; T = 1 509 → [9, 23]. Les deux cas intermédiaires correspondent à la table de
 Jorion (*Value at Risk*, 3ᵉ éd.). À p = 2,5 % : T = 250 → [3, 11] ; T = 1 000 → [16, 35].
 
-À vérifier dans les sources avant de les citer dans le README : seuils de Z2 (≈ −0,70 à 5 %,
-≈ −1,8 à 0,01 %, Acerbi et Székely, 2014) ; seuils FRTB par desk (12 exceptions à 99 %, 30 à 97,5 %).
+Vérifié le 2026-10-27 (rapport de vérification documentaire) : seuils Z2 −0,70 à 5 % et −1,8 à
+0,01 % (Acerbi et Székely, 2014, tableau 4), valables pour des queues gaussiennes ou Student-t
+avec ν ≥ 5 (−0,82 et −4,4 à ν = 3). FRTB, MAR32 : « more than 12 exceptions at the 99th
+percentile or 30 exceptions at the 97.5th percentile in the most recent 12-month period » ;
+non utilisé dans le code. Table 2 de BCBS (1996) vérifiée chiffre à chiffre.
 
 ---
 
