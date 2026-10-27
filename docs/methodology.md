@@ -107,7 +107,17 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
   discreteness of the empirical models. The simulation reproduces the published 5 % threshold
   ($\approx -0.70$ for $T = 250$).
 
-## 6. Reproducibility across machines
+## 6. Capital charge
+
+What a backtest result costs (`var_es.backtest.capital`):
+$K_t = \sqrt{10}\,\max\big(VaR_t,\ (3 + m_t)\,\overline{VaR}_{60}\big)$, with $VaR_t$ the one-day
+99 % VaR for day $t$, $\overline{VaR}_{60}$ its 60-day average and $m_t$ the plus factor of the
+exceptions observed over the 250 days before $t$ (BCBS, 1996). Simplifications: the multiplier
+is updated daily rather than quarterly, and there is no stressed-VaR term (added by Basel 2.5).
+Reported per model: mean and median charge, mean charge in each crisis window, and the
+peak-to-median ratio as a measure of procyclicality.
+
+## 7. Reproducibility across machines
 
 * Same machine, same pinned versions: every table is reproduced byte for byte (checked on a
   fresh clone and a fresh virtual environment).
@@ -121,7 +131,7 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
   than ten times that noise. The regression test uses tolerances derived from these
   measurements (`tests/test_regression.py`).
 
-## 7. Limitations (what the study does not do)
+## 8. Limitations (what the study does not do)
 
 * One-day horizon, linear portfolio of five ETFs, no intraday or liquidity effects; ETF closes
   can deviate from NAV in stress (LQD fell 9.1 % and rebounded 9.8 % on 29-30 September 2008).
@@ -142,6 +152,7 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
 * Acerbi, C. and Tasche, D. (2002). On the coherence of Expected Shortfall. *Journal of Banking & Finance* 26(7).
 * Barone-Adesi, G., Giannopoulos, K. and Vosper, L. (1999). VaR without correlations for portfolios of derivative securities. *Journal of Futures Markets* 19(5).
 * Basel Committee on Banking Supervision (1996). Supervisory framework for the use of "backtesting" in conjunction with the internal models approach to market risk capital requirements.
+* Basel Committee on Banking Supervision (1996). Amendment to the Capital Accord to incorporate market risks.
 * Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. *Journal of Econometrics* 31(3).
 * Christoffersen, P. (1998). Evaluating interval forecasts. *International Economic Review* 39(4).
 * Hull, J. and White, A. (1998). Incorporating volatility updating into the historical simulation method for value-at-risk. *Journal of Risk* 1(1).
