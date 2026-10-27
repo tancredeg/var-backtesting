@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "var-es"
+version = "1.0.0"
+description = "Backtested one-day VaR and Expected Shortfall: five methods, Kupiec / Christoffersen, Basel traffic lights, Acerbi-Szekely ES test."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Tancrède Geli" }]
+dependencies = [
+    "numpy==2.5.3",
+    "scipy==1.18.1",
+    "pandas==3.0.5",
+    "arch==8.0.0",
+    "matplotlib==3.11.2",
+]
+
+[project.optional-dependencies]
+data = ["yfinance==1.7.0"]
+dev = [
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.17.0",
+    "mypy==2.4.0",
+    "pandas-stubs==3.0.5.260914",
+    "scipy-stubs==1.18.1.1",
+    "nbconvert==7.17.2",
+    "nbformat==5.11.1",
+    "ipykernel==7.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+var_es = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["slow: simulation-heavy tests (still run in CI)"]
+
+[tool.coverage.run]
+source = ["var_es"]
+omit = ["*/var_es/plotting.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+skip_covered = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # Greek letters and typographic quotes in docstrings
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["arch.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["var_es.plotting"]  # matplotlib.dates ships without type hints
+disallow_untyped_calls = false
