@@ -1,4 +1,4 @@
-# CLAUDE.md — market-risk-var-es
+# CLAUDE.md — var-backtesting
 
 Instructions permanentes pour Claude Code dans ce repo. À lire en début de séance avec
 `AUDIT.md` et `PROGRESS.md`.

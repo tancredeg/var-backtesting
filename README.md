@@ -1,6 +1,6 @@
 # Backtested VaR and Expected Shortfall: which model survives a crisis?
 
-[![CI](https://github.com/tancredeg/market-risk-var-es/actions/workflows/ci.yml/badge.svg)](https://github.com/tancredeg/market-risk-var-es/actions/workflows/ci.yml)
+[![CI](https://github.com/tancredeg/var-backtesting/actions/workflows/ci.yml/badge.svg)](https://github.com/tancredeg/var-backtesting/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
