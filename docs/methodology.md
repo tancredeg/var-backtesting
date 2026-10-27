@@ -91,7 +91,21 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
   discreteness of the empirical models. The simulation reproduces the published 5 % threshold
   ($\approx -0.70$ for $T = 250$).
 
-## 6. Limitations (what the study does not do)
+## 6. Reproducibility across machines
+
+* Same machine, same pinned versions: every table is reproduced byte for byte (checked on a
+  fresh clone and a fresh virtual environment).
+* Another machine: floating-point results can differ in the last digits. Perturbing the
+  input prices by $10^{-15}$ relative noise moves the Monte Carlo VaR by up to
+  $6\cdot10^{-5}$ relative (the degrees of freedom are located to $10^{-3}$ by a bounded
+  search, and the stopping point can move within that tolerance where the likelihood is
+  flat); the other models move by less than $2\cdot10^{-8}$.
+* Exception counts are not affected: over the 4,812 forecasts, the closest loss of the
+  Student-t and Monte Carlo models sits $8\cdot10^{-4}$ (relative) away from its VaR, more
+  than ten times that noise. The regression test uses tolerances derived from these
+  measurements (`tests/test_regression.py`).
+
+## 7. Limitations (what the study does not do)
 
 * One-day horizon, linear portfolio of five ETFs, no intraday or liquidity effects; ETF closes
   can deviate from NAV in stress (LQD fell 9.1 % and rebounded 9.8 % on 29-30 September 2008).
