@@ -1,0 +1,68 @@
+{
+  "source": "Yahoo Finance via yfinance (auto_adjust=False; 'Adj Close' = dividend- and split-adjusted)",
+  "tickers": [
+    "SPY",
+    "TLT",
+    "GLD",
+    "EEM",
+    "LQD"
+  ],
+  "window_requested": {
+    "start": "2004-11-18",
+    "end_inclusive": "2025-12-31"
+  },
+  "downloaded_at_utc": "2026-10-13T22:46:58+00:00",
+  "versions": {
+    "python": "3.13.16",
+    "pandas": "3.0.5",
+    "yfinance": "1.7.0"
+  },
+  "validation": {
+    "per_ticker": {
+      "SPY": {
+        "rows": 5313,
+        "first": "2004-11-18",
+        "last": "2025-12-31",
+        "longest_flat_run_days": 1
+      },
+      "TLT": {
+        "rows": 5313,
+        "first": "2004-11-18",
+        "last": "2025-12-31",
+        "longest_flat_run_days": 1
+      },
+      "GLD": {
+        "rows": 5313,
+        "first": "2004-11-18",
+        "last": "2025-12-31",
+        "longest_flat_run_days": 1
+      },
+      "EEM": {
+        "rows": 5313,
+        "first": "2004-11-18",
+        "last": "2025-12-31",
+        "longest_flat_run_days": 1
+      },
+      "LQD": {
+        "rows": 5313,
+        "first": "2004-11-18",
+        "last": "2025-12-31",
+        "longest_flat_run_days": 1
+      }
+    },
+    "panel": {
+      "rows": 5313,
+      "first": "2004-11-18",
+      "last": "2025-12-31",
+      "dates_dropped_by_inner_join": []
+    }
+  },
+  "sha256": {
+    "raw/SPY.csv": "b4868fb01f11b58df5b0a0fbf29fa84c17dbc5a1730f380feaac6993f6f2e9b3",
+    "raw/TLT.csv": "a1c13d45530384aa1bf33b15031283f23b7d0a57e43ad68bab22d463a37b24bd",
+    "raw/GLD.csv": "00b07e81194e1b63a3ebbe4815c2bba351de22c4553371e481c0aea35ac7c87c",
+    "raw/EEM.csv": "26d5e6f8cd734c57ecaa1367e1a80acc942f283cab6b73f42037c41383126805",
+    "raw/LQD.csv": "6e63ddd2793ecc192463e19fae2b9787dc39c6c08a9e12354d97ce13df34ad1f",
+    "prices_adjclose.csv": "792499a8b80a2e8993de6d41bfc7e94b0b95590c758ca3e94b210968bdbcfa32"
+  }
+}

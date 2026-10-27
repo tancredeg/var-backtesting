@@ -1,0 +1,4 @@
+# Frozen data snapshot: byte-exact on every OS so the SHA-256 manifest check holds
+data/** -text
+tests/data/** -text
+*.png binary
