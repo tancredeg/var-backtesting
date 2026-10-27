@@ -1,7 +1,9 @@
 # AUDIT — Repo 1 : VaR / Expected Shortfall backtestées
 
-Phase 0 du standard « repo recruteur ». Date : 2026-10-13.
-Statut : **PRÉLIMINAIRE** — le code du repo n'a pas pu être lu (voir §0). Les constats ci-dessous
+Phase 0 du standard « repo recruteur ». Date : 2026-10-13. Mise à jour : 2026-10-14 (§8).
+Statut : **CLOS** — l'ancien code n'a jamais pu être lu (voir §0) ; il est remplacé par une
+réécriture complète (décision D1). La résolution de chaque constat est en §8.
+Statut d'origine : **PRÉLIMINAIRE** — le code du repo n'a pas pu être lu (voir §0). Les constats ci-dessous
 portent sur les données, les figures produites par le repo, l'historique des audits précédents et
 une réplication indépendante. Tous les chiffres cités sont imprimés par
 `scripts/phase0_replication.py` (section indiquée entre crochets, ex. [B]).
@@ -237,3 +239,38 @@ Jorion (*Value at Risk*, 3ᵉ éd.). À p = 2,5 % : T = 250 → [3, 11] ; T = 1 
 
 À vérifier dans les sources avant de les citer dans le README : seuils de Z2 (≈ −0,70 à 5 %,
 ≈ −1,8 à 0,01 %, Acerbi et Székely, 2014) ; seuils FRTB par desk (12 exceptions à 99 %, 30 à 97,5 %).
+
+---
+
+## 8. Résolution (2026-10-14)
+
+Réécriture complète dans `src/var_es/` (D1), décisions D2–D10 appliquées telles que
+recommandées en §4. Chaque ligne renvoie au test qui la verrouille.
+
+| Constat | Résolution | Verrou |
+|---|---|---|
+| C1 figures du build biaisé | Toutes les figures et tables régénérées par `scripts/run_results.py` ; le tableau du README est réécrit par le script | `tests/test_docs.py` |
+| C2 pas de 2008 | Snapshot 2004-11-18 → 2025-12-31 (5 313 dates), téléchargé depuis la session ; rendements 2014–2024 identiques à l'ancien snapshot à 2·10⁻⁶ près | `tests/test_data.py` |
+| M1 agrégation | Rendements simples, rebalancement quotidien, identité testée contre un chemin de richesse | `test_portfolio_return_is_exact_under_daily_rebalancing` |
+| M2 verdicts fragiles | p-values partout ; optimiseurs déterministes ; régression figée | `tests/test_regression.py` |
+| M3 W = 250 | W = 500 (principal), W = 250 en sensibilité (`results/sensitivity_window250.csv`) | — |
+| M4 zones mises à l'échelle | Comptages glissants sur 250 jours exactement | `test_rolling_zones_counts_the_last_250_days_including_today` |
+| M5 GARCH-t in-sample | FHS-GARCH(1,1), ré-estimé tous les 21 jours sur l'historique expansif, filtre identique à `arch` | `test_garch_filter_matches_arch_conditional_volatility`, test de non-look-ahead |
+| M6 MC redondant | Marges t par actif + copule gaussienne (scores normaux), nombres aléatoires communs, bruit publié | `test_monte_carlo_reduces_to_student_t_for_one_asset` |
+| M7 reproductibilité | Manifeste SHA-256 vérifié à chaque chargement ; `.gitattributes` contre la conversion CRLF | `test_tampered_file_is_refused` |
+| m1 31/12 manquant | Borne de fin inclusive (`end + 1 jour`) | `test_main_snapshot_matches_its_manifest` |
+| m2 fig. 04 | Figure supprimée (hors des résultats clés) | — |
+| m3 périmètre README | 4 résultats de la spec seulement | — |
+| m4 puissance à 99 % | Signalée ; le niveau 97,5 % et le Z2 complètent | — |
+| m5 temps de calcul | 462 s pour l'étude complète ; notebook < 5 s (lit `results/`) | — |
+| Quantile historique | Type 6 (Hyndman–Fan) : taux d'exception nominal ; le type 1 donnerait 1,20 % au lieu de 1 % | `test_type6_quantile_gives_the_nominal_exceedance_probability` |
+
+### Hypothèses du §6 confrontées aux résultats
+
+- **H1 réfutée en partie.** Les quatre méthodes non conditionnelles regroupent leurs exceptions,
+  comme prévu, mais FHS rejette aussi l'indépendance à 99 % (p < 0,001) : ses 5 paires
+  d'exceptions consécutives tombent toutes dans des ventes brutales (avr. 2013, août 2015,
+  fév. et mars 2020, avr. 2025). À 97,5 %, FHS est au niveau de l'i.i.d. sur 10 jours.
+- **H2 réfutée.** À 99 %, le regroupement domine : LR_ind = 99 % de LR_cc pour l'historique et
+  FHS, 54–76 % pour normale, t et MC.
+- **H3 réfutée.** Z2 rejette l'ES Student-t (p = 0,0012), pas seulement la normale.

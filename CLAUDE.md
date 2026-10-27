@@ -40,7 +40,7 @@ LR_uc / LR_ind — jamais d'un récit écrit à l'avance.
 
 ## Standard « repo recruteur » — phases (une par séance)
 
-0. Audit → `AUDIT.md` (fait, préliminaire : terminer l'audit du code).
+0. Audit → `AUDIT.md` (clos le 2026-10-14 ; résolution en §8).
 1. Structure : `src/var_es/`, `tests/`, `notebooks/`, `data/sample/`, `scripts/`, `docs/` ;
    `pyproject.toml` épinglé ; `pip install -e .`.
 2. Tests pytest : lois connues, cas de référence, régression sur `data/sample/` ; couverture ≥ 80 %.
