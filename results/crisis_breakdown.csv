@@ -1,0 +1,31 @@
+model,level,period,T,N,expected,consecutive_pairs,longest_run,mean_loss_over_var_on_hits,max_loss_over_var,peak_rolling_count,worst_zone
+Historical,0.99,GFC Sep 2008 - Mar 2009,146,9,1.46,1,2,1.43706,1.81211,11,red
+Historical,0.99,COVID Feb - Apr 2020,62,7,0.62,1,2,2.63398,4.21689,7,yellow
+Historical,0.99,Rates shock 2022,251,3,2.51,0,1,1.63765,2.02635,3,green
+Normal,0.99,GFC Sep 2008 - Mar 2009,146,17,1.46,3,2,1.58208,2.48628,19,red
+Normal,0.99,COVID Feb - Apr 2020,62,9,0.62,2,2,2.5637,5.08618,9,yellow
+Normal,0.99,Rates shock 2022,251,8,2.51,0,1,1.35131,2.2568,8,yellow
+Student-t,0.99,GFC Sep 2008 - Mar 2009,146,14,1.46,3,2,1.61694,2.64774,16,red
+Student-t,0.99,COVID Feb - Apr 2020,62,9,0.62,2,2,2.71659,5.29599,9,yellow
+Student-t,0.99,Rates shock 2022,251,5,2.51,0,1,1.40192,2.02113,5,yellow
+FHS-GARCH,0.99,GFC Sep 2008 - Mar 2009,146,2,1.46,0,1,1.03722,1.05185,2,green
+FHS-GARCH,0.99,COVID Feb - Apr 2020,62,6,0.62,2,2,1.35859,1.53331,6,yellow
+FHS-GARCH,0.99,Rates shock 2022,251,1,2.51,0,1,1.31871,1.31871,1,green
+Monte Carlo,0.99,GFC Sep 2008 - Mar 2009,146,14,1.46,3,2,1.60554,2.69959,16,red
+Monte Carlo,0.99,COVID Feb - Apr 2020,62,8,0.62,1,2,2.88476,5.20366,8,yellow
+Monte Carlo,0.99,Rates shock 2022,251,7,2.51,0,1,1.35422,2.16732,7,yellow
+Historical,0.975,GFC Sep 2008 - Mar 2009,146,18,3.65,4,2,1.69217,2.80271,25,red
+Historical,0.975,COVID Feb - Apr 2020,62,13,1.55,3,2,2.78851,6.82537,13,yellow
+Historical,0.975,Rates shock 2022,251,12,6.275,0,1,1.29318,2.29605,12,yellow
+Normal,0.975,GFC Sep 2008 - Mar 2009,146,23,3.65,5,2,1.66864,2.95456,29,red
+Normal,0.975,COVID Feb - Apr 2020,62,11,1.55,3,2,2.68834,6.06242,11,yellow
+Normal,0.975,Rates shock 2022,251,14,6.275,0,1,1.38786,2.68238,14,yellow
+Student-t,0.975,GFC Sep 2008 - Mar 2009,146,24,3.65,5,2,1.75653,3.40583,29,red
+Student-t,0.975,COVID Feb - Apr 2020,62,13,1.55,3,2,2.71345,6.52642,13,yellow
+Student-t,0.975,Rates shock 2022,251,14,6.275,0,1,1.36625,2.62682,14,yellow
+FHS-GARCH,0.975,GFC Sep 2008 - Mar 2009,146,5,3.65,0,1,1.24204,1.48438,11,yellow
+FHS-GARCH,0.975,COVID Feb - Apr 2020,62,7,1.55,2,2,1.70948,2.19189,8,green
+FHS-GARCH,0.975,Rates shock 2022,251,5,6.275,0,1,1.24582,1.69292,7,green
+Monte Carlo,0.975,GFC Sep 2008 - Mar 2009,146,26,3.65,7,2,1.7067,3.48966,31,red
+Monte Carlo,0.975,COVID Feb - Apr 2020,62,13,1.55,3,2,2.8195,6.82084,13,yellow
+Monte Carlo,0.975,Rates shock 2022,251,16,6.275,1,2,1.35477,2.71542,16,yellow

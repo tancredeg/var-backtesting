@@ -1,0 +1,15 @@
+{
+  "first_return_date": "2004-11-19",
+  "last_date": "2025-12-31",
+  "n_returns": 5312,
+  "first_forecast_date": "2006-11-14",
+  "annualised_mean_simple": 0.09398189555745538,
+  "annualised_vol": 0.10987157535212672,
+  "worst_day": "2020-03-12",
+  "worst_day_return": -0.05722386613362141,
+  "full_sample_t_nu": 3.454725726772871,
+  "full_sample_garch_alpha_plus_beta": 0.9820152220024938,
+  "full_sample_garch_half_life_days": 38.193147465814846,
+  "spy_tlt_corr_250d_mean_2007_2021": -0.39466707814322116,
+  "spy_tlt_corr_250d_end_2022": 0.08882157561351069
+}

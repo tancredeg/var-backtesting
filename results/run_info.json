@@ -1,0 +1,76 @@
+{
+  "package_version": "1.0.0",
+  "period": "Out-of-sample 2006-11-14 to 2025-12-31 (4,812 days)",
+  "config": {
+    "tickers": [
+      "SPY",
+      "TLT",
+      "GLD",
+      "EEM",
+      "LQD"
+    ],
+    "weights": [
+      0.3,
+      0.2,
+      0.25,
+      0.15,
+      0.1
+    ],
+    "levels": [
+      0.99,
+      0.975
+    ],
+    "es_level": 0.975,
+    "window": 500,
+    "refit_every": 21,
+    "zone_window": 250,
+    "mc_sims": 20000,
+    "z2_sims": 5000,
+    "nu_bounds": [
+      2.05,
+      100.0
+    ],
+    "seed": 20261013,
+    "crisis_windows": {
+      "GFC Sep 2008 - Mar 2009": [
+        "2008-09-01",
+        "2009-03-31"
+      ],
+      "COVID Feb - Apr 2020": [
+        "2020-02-01",
+        "2020-04-30"
+      ],
+      "Rates shock 2022": [
+        "2022-01-01",
+        "2022-12-31"
+      ]
+    }
+  },
+  "data_sha256": {
+    "raw/SPY.csv": "b4868fb01f11b58df5b0a0fbf29fa84c17dbc5a1730f380feaac6993f6f2e9b3",
+    "raw/TLT.csv": "a1c13d45530384aa1bf33b15031283f23b7d0a57e43ad68bab22d463a37b24bd",
+    "raw/GLD.csv": "00b07e81194e1b63a3ebbe4815c2bba351de22c4553371e481c0aea35ac7c87c",
+    "raw/EEM.csv": "26d5e6f8cd734c57ecaa1367e1a80acc942f283cab6b73f42037c41383126805",
+    "raw/LQD.csv": "6e63ddd2793ecc192463e19fae2b9787dc39c6c08a9e12354d97ce13df34ad1f",
+    "prices_adjclose.csv": "792499a8b80a2e8993de6d41bfc7e94b0b95590c758ca3e94b210968bdbcfa32"
+  },
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "runtime_seconds": 461.5,
+  "model_seconds": {
+    "Historical": 1.0,
+    "Normal": 3.3,
+    "Student-t": 8.5,
+    "FHS-GARCH": 6.4,
+    "Monte Carlo": 214.7
+  },
+  "fhs_garch_nonconverged_refits": 0,
+  "forecast_columns": [
+    "VaR_99",
+    "VaR_97.5",
+    "ES_99",
+    "ES_97.5"
+  ]
+}
