@@ -14,7 +14,7 @@ une réplication indépendante. Tous les chiffres cités sont imprimés par
 
 | Élément | Statut |
 |---|---|
-| Code (`var_es_pipeline.py`, `generate_notebook.py`, notebook) | **Non lu.** Repo `tancredeg/market-risk-var-es` inaccessible depuis la session (application GitHub non liée au compte). |
+| Code (`var_es_pipeline.py`, `generate_notebook.py`, notebook) | **Non lu le 2026-10-13** : repo inaccessible (application GitHub non liée ; nom alors supposé `market-risk-var-es`, en réalité `tancredeg/var-backtesting`). **Lu le 2026-10-27** : voir §9. |
 | Données (5 CSV, Adj Close) | Lues et contrôlées [A]. |
 | Figures 01–07 | Lues ; chiffres affichés recoupés par réplication [B][C][D]. |
 | Historique d'audit (mai–juillet 2026) | Repris des sessions précédentes ; non revérifié sur le code. |
@@ -274,3 +274,31 @@ recommandées en §4. Chaque ligne renvoie au test qui la verrouille.
 - **H2 réfutée.** À 99 %, le regroupement domine : LR_ind = 99 % de LR_cc pour l'historique et
   FHS, 54–76 % pour normale, t et MC.
 - **H3 réfutée.** Z2 rejette l'ES Student-t (p = 0,0012), pas seulement la normale.
+
+---
+
+## 9. Audit du code d'origine (lu le 2026-10-27)
+
+Source : `tancredeg/var-backtesting`, commit `dd4ff65` (2026-06-01), fichier `var_es_pipeline.py`
+sauf mention contraire. Les corrections de l'audit de juillet n'ont jamais été poussées : le
+README public affiche encore le build biaisé (C1 confirmé).
+
+| # | Constat | Lignes | Gravité | Traitement en v1 |
+|---|---|---|---|---|
+| 1 | ν̂ de la Student-t estimé une fois sur tout l'échantillon 2014–2024, puis injecté dans la VaR glissante hors échantillon : look-ahead | 565, 316–319, 639 | Éliminatoire | ν ré-estimé tous les 21 jours sur la seule fenêtre passée ; test de propriété anti-look-ahead |
+| 2 | GARCH(1,1)-t estimé une fois sur tout l'échantillon ; moyenne du rendement = moyenne plein échantillon ; la volatilité conditionnelle déjà prévisionnelle est encore décalée d'un jour (`shift(1)`) | 611, 288, 627, 640 | Éliminatoire | FHS : paramètres ré-estimés sur l'historique passé, filtre identique à `arch` (testé), aucun décalage supplémentaire |
+| 3 | Rendement du portefeuille = somme pondérée des log-rendements | 84–90 | Majeur | Rendements simples, rebalancement quotidien exact (testé) |
+| 4 | Kupiec renvoie LR = 0, p = 1 quand il n'y a aucune exception : un modèle trop prudent passe en silence | 341–343 | Majeur | `xlogy` : LR = −2T ln(1−p) (testé) |
+| 5 | Zones de Bâle calculées sur un comptage remis à l'échelle de 250 jours (n·250/T) au lieu de fenêtres de 250 jours | 352, 452–461 | Majeur | Comptage glissant exact sur 250 jours (testé contre la table BCBS 1996) |
+| 6 | Monte Carlo = tirages N(μ, σ) avec les moments de la normale : doublon du modèle normal ; graine globale `np.random.seed` | 194–199, 229–236 | Majeur | Marges t par actif + copule gaussienne, flux aléatoires dédiés (`SeedSequence`) |
+| 7 | Quantile historique par interpolation linéaire (type 7) sur 252 jours : taux d'exception biaisé | 174–176, 50 | Mineur | Type 6, W = 500 (W = 250 en sensibilité) |
+| 8 | Conditional coverage recalculé avec la même règle n = 0 → 0 ; `log(0)` remplacé par −500 | 394–417 | Mineur | `xlogy` ; identité LR_cc = LR_uc(T−1) + LR_ind testée |
+| 9 | `warnings.filterwarnings('ignore')` global : les échecs de convergence d'`arch` sont masqués | 41 | Mineur | Avertissements filtrés localement, drapeau de convergence enregistré (0 échec sur 230 ré-estimations) |
+| 10 | Données et figures exclues de git, dépendances en `>=`, fin de téléchargement exclusive (31/12/2024 manquant), `auto_adjust=True` | `.gitignore`, `requirements.txt`, `download_data.py` l. 38–39, 59–60 | Majeur | Snapshot versionné + SHA-256, dépendances épinglées, fin inclusive, `auto_adjust=False` |
+| 11 | README : « Key Results (2018–2024 sample) » alors que le code charge 2014–2024 ; tous les modèles en zone verte (effet du n° 5) ; Student-t « 19 / PASS » (effet du n° 1) | `README.md` | Éliminatoire (vitrine) | Tableau du README écrit par `scripts/run_results.py`, test `tests/test_docs.py` |
+
+Les quatre points « à vérifier dans le code » du §2 sont tranchés : l'alignement des VaR
+historique et normale était correct (`rolling().apply()` puis `shift(1)`) ; le quantile était
+de type 7 ; le Monte Carlo utilisait une graine globale sans erreur standard ; la convention de
+signe était cohérente. Le défaut de fond était l'estimation des paramètres lents sur tout
+l'échantillon (n° 1 et 2), pas l'alignement des fenêtres.
