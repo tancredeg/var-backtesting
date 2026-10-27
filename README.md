@@ -115,7 +115,7 @@ rejected (p = 0.003).
 - One-day horizon only, on a linear ETF portfolio. There are no liquidity or intraday effects.
   ETF prices can leave their NAV in stress: LQD lost 9.1 % and regained 9.8 % on 29-30
   September 2008.
-- The data come from a single vendor.
+- The data come from a single vendor; internal consistency checks are in the methodology notes.
 - GARCH is symmetric (no leverage effect), and the Gaussian copula has no tail dependence.
 - Monte Carlo ES carries simulation noise: up to 9 % relative standard deviation at 99 % on
   stressed dates (`results/mc_noise.csv`).

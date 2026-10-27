@@ -17,6 +17,22 @@ quoted in the README come from `scripts/run_results.py`.
   $L_t = -r_{p,t}$, as a fraction of portfolio value. Summing weighted *log* returns is not the
   portfolio log return and biases the tail; this is tested.
 
+**Data checks** (`scripts/audit_data.py`, needs the `[data]` extra and network access; run
+2026-10-27):
+
+* Unadjusted closes of the snapshot equal a fresh download to $5\cdot10^{-10}$ and none lies
+  outside the day's low-high range, including the extreme crisis prints (SPY +14.5 % on
+  13 Oct 2008 closed at its high; LQD's 81.80 on 29 Sep 2008 is inside an 80.00-89.49
+  range).
+* Adjusted minus unadjusted returns are non-zero only on distribution days, with plausible
+  sizes and frequencies: SPY 85 quarterly (0.28-0.80 %), TLT and LQD 253 monthly, EEM 44
+  semi-annual, GLD none.
+* SPY against the S&P 500 index: median daily gap 10.6 bp over 2004-2009 and 2.7 bp over
+  2010-2025, autocorrelation -0.37 (gaps reverse the next day) and a SPY / index ratio that
+  stays between 0.0984 and 0.1014: the larger early gaps reverse instead of accumulating,
+  which points to closing-time effects (several exchanges moved ETF closes from 4:15 to
+  4:00 p.m. ET during 2008), not to level errors.
+
 ## 2. Forecasting protocol
 
 * One-day horizon, levels $\alpha \in \{99\,\%, 97.5\,\%\}$.
@@ -109,8 +125,8 @@ the VaR path reflects the data, not simulation noise. Seed-to-seed dispersion is
 
 * One-day horizon, linear portfolio of five ETFs, no intraday or liquidity effects; ETF closes
   can deviate from NAV in stress (LQD fell 9.1 % and rebounded 9.8 % on 29-30 September 2008).
-* One data vendor; the pre-2014 part of the snapshot is not cross-checked against a second
-  source (2014-2024 returns match an independent earlier download to $2\cdot10^{-6}$).
+* One data vendor (Yahoo Finance). The checks above are internal consistency checks, not a
+  second source; 2014-2024 returns also match an earlier download to $2\cdot10^{-6}$.
 * Asymptotic $\chi^2$ p-values for Kupiec and Christoffersen; with about 48 expected 99 %
   exceptions in 4,812 days the approximation is adequate on the full sample, not on short
   crisis windows (crisis tables report counts, not p-values, except for $Z_2$ whose p-values
