@@ -1,0 +1,11 @@
+{
+  "source": "cut from data/prices_adjclose.csv by scripts/make_sample.py",
+  "window": {
+    "start": "2019-01-02",
+    "end_inclusive": "2020-12-31"
+  },
+  "rows": 505,
+  "sha256": {
+    "prices_adjclose.csv": "ce9954b60afe08ac0e0485290da3e16eb6392a5e10a34e1f7edda3be1468d5e4"
+  }
+}
