@@ -136,6 +136,11 @@ peak-to-median ratio as a measure of procyclicality.
   Student-t and Monte Carlo models sits $8\cdot10^{-4}$ (relative) away from its VaR, more
   than ten times that noise. The regression test uses tolerances derived from these
   measurements (`tests/test_regression.py`).
+* Observed on a second machine (fresh environment, same pinned versions, 2026-11-04): every
+  published table was identical. Only the FHS-GARCH forecasts moved, by up to
+  $2\cdot10^{-5}$ relative (GARCH estimation by `arch`); the Monte Carlo ones did not. No
+  exception changed: the closest FHS loss sits $6.6\cdot10^{-5}$ away from its 97.5 % VaR,
+  about twenty times the largest move of that VaR.
 
 ## 8. Limitations (what the study does not do)
 
