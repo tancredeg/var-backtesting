@@ -2,3 +2,5 @@
 data/** -text
 tests/data/** -text
 *.png binary
+# Demo notebook (embedded figures): kept out of GitHub's language statistics
+notebooks/*.ipynb linguist-documentation
