@@ -41,7 +41,6 @@ var_es = ["py.typed"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
-markers = ["slow: simulation-heavy tests (still run in CI)"]
 
 [tool.coverage.run]
 source = ["var_es"]
