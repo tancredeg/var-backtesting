@@ -20,7 +20,7 @@ so day-to-day changes of the VaR reflect the data, not simulation noise.
 References
 ----------
 Glasserman, P. (2003), *Monte Carlo Methods in Financial Engineering*, Springer, Ch. 9.
-McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, 2nd ed., Chapter 7.
+McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, revised ed., Chapter 7.
 """
 
 from __future__ import annotations

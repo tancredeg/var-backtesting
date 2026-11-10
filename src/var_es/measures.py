@@ -81,7 +81,7 @@ def normal_var_es(mu: float, sigma: float, level: float) -> tuple[float, float]:
               \mathrm{ES}_\alpha = -\mu + \sigma\,\frac{\varphi(z_\alpha)}{1-\alpha},
               \qquad z_\alpha = \Phi^{-1}(\alpha).
 
-    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, 2nd ed.,
+    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, revised ed.,
     Chapter 2.
     """
     if sigma <= 0:
@@ -102,7 +102,7 @@ def student_t_var_es(mu: float, scale: float, nu: float, level: float) -> tuple[
     ``scale`` is the t scale parameter, not the standard deviation
     (:math:`\mathrm{sd} = s\sqrt{\nu/(\nu-2)}` for :math:`\nu > 2`).
 
-    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, 2nd ed.,
+    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, revised ed.,
     Chapter 2.
     """
     if scale <= 0 or nu <= 1:

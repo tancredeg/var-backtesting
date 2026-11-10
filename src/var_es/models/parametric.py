@@ -50,7 +50,7 @@ class StudentTParametric:
     step); location and scale are re-estimated daily by EM at the current :math:`\nu`
     (fast step). Every estimate uses the last ``window`` returns only.
 
-    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, 2nd ed.,
+    Reference: McNeil, Frey and Embrechts (2015), *Quantitative Risk Management*, revised ed.,
     Chapter 6 (multivariate t, univariate special case).
     """
 
