@@ -174,3 +174,5 @@ docs/methodology.md   formulas, choices and limitations
 - Jorion, P. (2007). *Value at Risk*, 3rd ed.
 - Kupiec, P. (1995). Techniques for verifying the accuracy of risk measurement models. *Journal of Derivatives* 3(2).
 - McNeil, A., Frey, R. and Embrechts, P. (2015). *Quantitative Risk Management*, revised ed.
+
+Built in collaboration with Claude (Anthropic) as a coding assistant.

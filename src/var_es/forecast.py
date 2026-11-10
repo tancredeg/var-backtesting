@@ -31,12 +31,10 @@ def level_tag(level: float) -> str:
 
 
 def var_col(level: float) -> str:
-    """Name of the VaR column for ``level``."""
     return f"VaR_{level_tag(level)}"
 
 
 def es_col(level: float) -> str:
-    """Name of the ES column for ``level``."""
     return f"ES_{level_tag(level)}"
 
 

@@ -15,5 +15,9 @@ htmlcov/
 .ipynb_checkpoints/
 .DS_Store
 
-# Notes locales de préparation, jamais publiées
+# Local working files, not part of the published project
+.claude/
+CLAUDE.md
+AUDIT.md
+PROGRESS.md
 entretien/

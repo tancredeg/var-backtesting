@@ -92,7 +92,6 @@ def zone_shares(zones: pd.Series) -> dict[str, float]:
 
 
 def worst_zone(zones: npt.ArrayLike) -> Zone:
-    """Most severe zone reached."""
     z = set(np.asarray(zones).tolist())
     if "red" in z:
         return "red"

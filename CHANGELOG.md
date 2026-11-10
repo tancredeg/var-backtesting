@@ -2,8 +2,8 @@
 
 ## v1.0.0 — 2026-10-27
 
-First public version of the rewrite. It replaces the June 2026 pipeline, whose Student-t and
-GARCH backtests used full-sample parameters (see `AUDIT.md`, section 9).
+First public release. It replaces a June 2026 version whose Student-t and GARCH backtests used
+full-sample parameters.
 
 - Five one-day VaR / ES models: historical simulation, normal, Student-t (maximum likelihood),
   GARCH(1,1)-filtered historical simulation, Monte Carlo with Student-t marginals and a
